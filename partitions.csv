@@ -1,0 +1,9 @@
+# A 3 MB app partition — Arduino + NimBLE + Wi-Fi + mbedTLS is large.
+# blifi_nvs is a dedicated NVS partition for Wi-Fi credentials so the bootloader
+# factory reset (see sdkconfig.defaults) erases only it, leaving the default nvs
+# partition (PoP, app data) intact.
+# Name,     Type, SubType, Offset,   Size
+nvs,        data, nvs,     0x9000,   0x6000
+phy_init,   data, phy,     0xf000,   0x1000
+factory,    app,  factory, 0x10000,  0x300000
+blifi_nvs,  data, nvs,     0x310000, 0x4000

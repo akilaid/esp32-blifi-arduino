@@ -1,0 +1,38 @@
+# Build config for the Arduino+ESP-IDF combined build. These bootloader/Kconfig
+# settings can't be changed from a plain Arduino IDE sketch — that's why this is a
+# PlatformIO (framework = arduino, espidf) project.
+
+# arduino-esp32 requires a 1 kHz FreeRTOS tick.
+CONFIG_FREERTOS_HZ=1000
+
+# Let the Arduino core provide app_main() and call setup()/loop().
+CONFIG_AUTOSTART_ARDUINO=y
+
+# 4 MB flash (common ESP32 devkit).
+CONFIG_ESPTOOLPY_FLASHSIZE_4MB=y
+CONFIG_ESPTOOLPY_FLASHSIZE="4MB"
+
+# The blifi component is NimBLE-based — use NimBLE, not Bluedroid.
+CONFIG_BT_ENABLED=y
+CONFIG_BT_NIMBLE_ENABLED=y
+CONFIG_BT_NIMBLE_HOST_TASK_STACK_SIZE=8192
+
+# blifi runs AES-GCM crypto + BLE notify inside the default event-loop task on
+# credential receipt; give sys_evt a larger stack so it doesn't overflow.
+CONFIG_ESP_SYSTEM_EVENT_TASK_STACK_SIZE=6144
+
+# Session key schedule.
+CONFIG_MBEDTLS_HKDF_C=y
+
+# Free IRAM (Arduino + NimBLE + Wi-Fi are tight): keep Wi-Fi routines in flash.
+CONFIG_ESP_WIFI_IRAM_OPT=n
+CONFIG_ESP_WIFI_RX_IRAM_OPT=n
+
+# Reset-pin hard reset: hold GPIO13 (D13) to GND for 3 s at boot to erase the
+# blifi_nvs partition (Wi-Fi credentials only). Runs in the bootloader; the
+# default nvs partition (PoP, app data) is untouched.
+CONFIG_BOOTLOADER_FACTORY_RESET=y
+CONFIG_BOOTLOADER_NUM_PIN_FACTORY_RESET=13
+CONFIG_BOOTLOADER_FACTORY_RESET_PIN_LOW=y
+CONFIG_BOOTLOADER_HOLD_TIME_GPIO=3
+CONFIG_BOOTLOADER_DATA_FACTORY_RESET="blifi_nvs"

@@ -1,0 +1,5 @@
+# Pull the blifi ESP-IDF component (single source of truth) from the monorepo.
+# A relative path keeps it in sync and works on any OS (no symlinks).
+dependencies:
+  blifi:
+    path: ../../../firmware/components/blifi

@@ -1,0 +1,15 @@
+# Syntax highlighting for the Blifi Arduino library.
+# Fields separated by a single true tab.
+
+Blifi	KEYWORD1
+BlifiClass	KEYWORD1
+
+begin	KEYWORD2
+onStatusChanged	KEYWORD2
+onProvisioned	KEYWORD2
+onDataResetRequested	KEYWORD2
+wasHardReset	KEYWORD2
+isProvisioned	KEYWORD2
+resetCredentials	KEYWORD2
+pop	KEYWORD2
+statusString	KEYWORD2
