@@ -6,6 +6,18 @@ versioned independently under [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+Nothing yet.
+
+## [0.1.1] — 2026-07-25
+
+### Added
+- Example sketches (`examples/`): `Basic` (smallest possible sketch),
+  `StatusCallbacks` (named device + full status reporting), and `FullConfig`
+  (every config surface: `BlifiConfig`, hard-reset hooks, indicator pin, and a
+  serial `r` command for the software credential reset).
+
+## [0.1.0] — 2026-07-25
+
 ### Added
 - Initial `Blifi` wrapper: a thin C++ Arduino API over the `blifi` ESP-IDF
   component (`begin`, `onProvisioned`, `onStatusChanged`, `isProvisioned`,

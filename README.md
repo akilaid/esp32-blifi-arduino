@@ -55,6 +55,18 @@ write ordinary Arduino code (`setup()`/`loop()`, `Serial`, `IPAddress`).
 The `blifi` component is pulled automatically from the monorepo via
 `src/idf_component.yml` (a relative path — no symlinks, works on any OS).
 
+## Examples
+
+Three sketches under [`examples/`](examples), smallest first — copy one into
+`src/main.cpp` (or point `src_dir` at it) when using this folder as a
+PlatformIO project:
+
+- [`Basic`](examples/Basic) — provision + print the PoP, ~10 lines.
+- [`StatusCallbacks`](examples/StatusCallbacks) — named device, live status
+  stream, `isProvisioned()` branching.
+- [`FullConfig`](examples/FullConfig) — `BlifiConfig` (device name + indicator
+  pin), hard-reset hooks, and a serial command for the software reset.
+
 ## API
 
 | Call | Purpose |
