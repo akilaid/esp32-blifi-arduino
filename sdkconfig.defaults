@@ -24,6 +24,11 @@ CONFIG_ESP_SYSTEM_EVENT_TASK_STACK_SIZE=6144
 # Session key schedule.
 CONFIG_MBEDTLS_HKDF_C=y
 
+# Fixed Proof-of-Possession (optional). Uncomment to hardcode the PoP instead of
+# auto-generating one; it must be exactly 8 Crockford base32 chars (0-9, A-Z minus
+# I/L/O/U) or the build fails. Leaving it unset keeps the auto-generated PoP.
+# CONFIG_BLIFI_FIXED_POP="ABCD2345"
+
 # Free IRAM (Arduino + NimBLE + Wi-Fi are tight): keep Wi-Fi routines in flash.
 CONFIG_ESP_WIFI_IRAM_OPT=n
 CONFIG_ESP_WIFI_RX_IRAM_OPT=n

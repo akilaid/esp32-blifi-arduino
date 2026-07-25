@@ -45,6 +45,9 @@ struct BlifiResetIndicator {
 /** Config for `Blifi.begin(config)`. */
 struct BlifiConfig {
   const char *deviceName = nullptr;   ///< BLE name; null → auto "blifi-XXXX"
+  const char *pop = nullptr;          ///< fixed PoP: exactly 8 Crockford base32
+                                      ///< chars (0-9, A-Z minus I/L/O/U); null =
+                                      ///< auto-generate. Invalid → begin() fails.
   BlifiResetIndicator resetIndicator; ///< optional §6.2 indicator pin
 };
 

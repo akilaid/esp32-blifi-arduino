@@ -8,6 +8,15 @@ versioned independently under [Semantic Versioning](https://semver.org/).
 
 Nothing yet.
 
+## [0.2.0] - 2026-07-25
+
+### Added
+- Fixed Proof-of-Possession support in `BlifiConfig`: set `cfg.pop = "ABCD2345"`
+  (exactly 8 Crockford base32 chars) and `Blifi.begin(cfg)` uses it instead of an
+  auto-generated PoP; a malformed value makes `begin()` return false. Can also be
+  hardcoded via `CONFIG_BLIFI_FIXED_POP` in `sdkconfig.defaults` (validated at
+  build time). `BlifiConfig` / `BlifiResetIndicator` added to `keywords.txt`.
+
 ## [0.1.2] - 2026-07-25
 
 ### Changed

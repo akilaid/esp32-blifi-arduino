@@ -31,6 +31,9 @@ bool BlifiClass::begin(const char *deviceName) {
 bool BlifiClass::begin(const BlifiConfig &config) {
   blifi_config_t cfg = BLIFI_DEFAULT_CONFIG();
   cfg.device_name = config.deviceName;
+  // Only override when set, so a build-time CONFIG_BLIFI_FIXED_POP default is
+  // not clobbered by the (unset) default nullptr.
+  if (config.pop) cfg.fixed_pop = config.pop;
   cfg.reset_indicator.enable       = config.resetIndicator.enable;
   cfg.reset_indicator.gpio         = (int8_t)config.resetIndicator.gpio;
   cfg.reset_indicator.active_level = (uint8_t)(config.resetIndicator.activeLevel ? 1 : 0);

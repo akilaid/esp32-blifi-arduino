@@ -72,6 +72,7 @@ PlatformIO project:
 | Call | Purpose |
 |------|---------|
 | `Blifi.begin()` / `Blifi.begin("my-name")` | Initialise + start provisioning (optional BLE name). |
+| `Blifi.begin(config)` | Initialise + start with a `BlifiConfig` (device name, fixed PoP, hard-reset indicator). |
 | `Blifi.onProvisioned(cb)` | `cb(IPAddress ip)` when the device comes online. |
 | `Blifi.onStatusChanged(cb)` | `cb(blifi_status_t)` on every status change. |
 | `Blifi.isProvisioned()` | Whether Wi-Fi credentials are stored. |
@@ -79,6 +80,28 @@ PlatformIO project:
 | `Blifi.pop()` | The device's Proof-of-Possession string. |
 | `Blifi.statusString(s)` | Human-readable name for a status code. |
 | `Blifi.onDataResetRequested(cb)` / `Blifi.wasHardReset()` | Reset-pin hard-reset hooks - see below. |
+
+## Proof-of-Possession (PoP)
+
+`Blifi.pop()` returns the code the phone must enter to provision. By default it is
+random (generated on first boot, kept in NVS, printed to serial). To pin it to a
+fixed value - 8 Crockford base32 chars (`0-9`, `A-Z` minus `I/L/O/U`), e.g.
+`ABCD2345`:
+
+- **Build time (fails the build on a bad value):** uncomment in `sdkconfig.defaults`
+  ```
+  CONFIG_BLIFI_FIXED_POP="ABCD2345"
+  ```
+- **In the sketch:**
+  ```cpp
+  BlifiConfig cfg;
+  cfg.pop = "ABCD2345";   // invalid -> Blifi.begin() returns false
+  Blifi.begin(cfg);
+  ```
+
+Leave both unset to keep the auto-generated PoP. Reusing one PoP across many devices
+weakens security - prefer a unique value per unit. See the
+[component PoP guide](../../firmware/components/blifi/README.md#proof-of-possession-pop).
 
 ## Reset-pin hard reset (enabled)
 

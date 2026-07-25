@@ -3,6 +3,8 @@
 
 Blifi	KEYWORD1
 BlifiClass	KEYWORD1
+BlifiConfig	KEYWORD1
+BlifiResetIndicator	KEYWORD1
 
 begin	KEYWORD2
 onStatusChanged	KEYWORD2
