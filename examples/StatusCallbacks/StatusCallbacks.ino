@@ -1,5 +1,5 @@
 /*
- * StatusCallbacks — a named device with full status reporting.
+ * StatusCallbacks - a named device with full status reporting.
  *
  * Adds to Basic:
  *  - a custom BLE device name (shows up in the phone app's scan list)

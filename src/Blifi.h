@@ -16,7 +16,7 @@
  *   }
  *
  * Note: the reset-pin (bootloader) hard reset is NOT available in the Arduino IDE
- * build — see the README. wasHardReset() therefore returns false here; the
+ * build - see the README. wasHardReset() therefore returns false here; the
  * software resetCredentials() works everywhere.
  */
 #pragma once
@@ -27,7 +27,7 @@
 
 extern "C" {
 // Angle brackets (not quotes) so the preprocessor skips this file's own
-// directory — on case-insensitive filesystems `"blifi.h"` would otherwise
+// directory - on case-insensitive filesystems `"blifi.h"` would otherwise
 // collide with this wrapper's `Blifi.h`. Resolves to the blifi component's header.
 #include <blifi.h>
 }

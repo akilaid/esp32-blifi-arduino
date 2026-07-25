@@ -1,5 +1,5 @@
 /*
- * BasicProvisioning — provision an ESP32's Wi-Fi over BLE with blifi.
+ * BasicProvisioning - provision an ESP32's Wi-Fi over BLE with blifi.
  *
  * 1. Open this folder in VS Code + PlatformIO and click Upload.
  * 2. Open the Serial Monitor (115200) and note the printed Proof-of-Possession.

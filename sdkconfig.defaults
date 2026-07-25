@@ -1,5 +1,5 @@
 # Build config for the Arduino+ESP-IDF combined build. These bootloader/Kconfig
-# settings can't be changed from a plain Arduino IDE sketch — that's why this is a
+# settings can't be changed from a plain Arduino IDE sketch - that's why this is a
 # PlatformIO (framework = arduino, espidf) project.
 
 # arduino-esp32 requires a 1 kHz FreeRTOS tick.
@@ -12,7 +12,7 @@ CONFIG_AUTOSTART_ARDUINO=y
 CONFIG_ESPTOOLPY_FLASHSIZE_4MB=y
 CONFIG_ESPTOOLPY_FLASHSIZE="4MB"
 
-# The blifi component is NimBLE-based — use NimBLE, not Bluedroid.
+# The blifi component is NimBLE-based - use NimBLE, not Bluedroid.
 CONFIG_BT_ENABLED=y
 CONFIG_BT_NIMBLE_ENABLED=y
 CONFIG_BT_NIMBLE_HOST_TASK_STACK_SIZE=8192

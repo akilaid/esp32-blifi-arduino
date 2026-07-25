@@ -1,4 +1,4 @@
-# Changelog — Blifi (Arduino library)
+# Changelog - Blifi (Arduino library)
 
 All notable changes to the Arduino library are documented here. Format based on
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); this library is
@@ -8,7 +8,14 @@ versioned independently under [Semantic Versioning](https://semver.org/).
 
 Nothing yet.
 
-## [0.1.1] — 2026-07-25
+## [0.1.2] - 2026-07-25
+
+### Changed
+- Docs only: removed em-dashes from the README, the `library.properties`
+  sentence, the example sketches, and code comments (hyphens/colons instead).
+  No code changes.
+
+## [0.1.1] - 2026-07-25
 
 ### Added
 - Example sketches (`examples/`): `Basic` (smallest possible sketch),
@@ -16,7 +23,7 @@ Nothing yet.
   (every config surface: `BlifiConfig`, hard-reset hooks, indicator pin, and a
   serial `r` command for the software credential reset).
 
-## [0.1.0] — 2026-07-25
+## [0.1.0] - 2026-07-25
 
 ### Added
 - Initial `Blifi` wrapper: a thin C++ Arduino API over the `blifi` ESP-IDF
@@ -35,7 +42,7 @@ Nothing yet.
   feature via `CONFIG_BLIFI_RESET_INDICATOR_ENABLE=y` in `sdkconfig.defaults`, then
   set the pin/level/pulse at runtime. Opt-in; off by default.
 
-### Fixed (Arduino/ESP-IDF-5.5 integration — all in the wrapper/config, not the component)
+### Fixed (Arduino/ESP-IDF-5.5 integration - all in the wrapper/config, not the component)
 - **BLE controller wouldn't start** (`nimble_port_init: ESP_ERR_INVALID_STATE`):
   Arduino's `initArduino()` frees the BLE controller memory at boot unless
   `bleInUse()` is true. Since blifi uses the IDF NimBLE stack directly (not
@@ -57,6 +64,6 @@ Nothing yet.
 - **Known limitation:** the bootloader erase works, but app-side hard-reset
   detection (`wasHardReset()`, `onDataResetRequested()`, the `HARD_RESET_TRIGGERED`
   event, and the §6.2 indicator pin) does **not** fire on the Arduino/PlatformIO
-  (ESP-IDF 5.5) stack — the bootloader RTC-retain flag is clobbered before the app
+  (ESP-IDF 5.5) stack - the bootloader RTC-retain flag is clobbered before the app
   reads it. Those work only on a standalone ESP-IDF (`idf.py`) build. Use
   `resetCredentials()` for an in-code reset.

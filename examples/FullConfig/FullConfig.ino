@@ -1,5 +1,5 @@
 /*
- * FullConfig — every configuration surface of the library, plus a serial
+ * FullConfig - every configuration surface of the library, plus a serial
  * command to forget Wi-Fi at runtime.
  *
  * Shows:
@@ -7,13 +7,13 @@
  *  - onDataResetRequested / wasHardReset: the reset-pin hard-reset hooks
  *  - resetCredentials(): software "forget Wi-Fi" (type 'r' in the monitor)
  *
- * Reset pin: this project enables the bootloader factory reset — hold
+ * Reset pin: this project enables the bootloader factory reset - hold
  * GPIO13 (D13) to GND for 3 s while the board powers on and the bootloader
  * erases the Wi-Fi credentials (the PoP survives, so a printed QR keeps
  * working). Pin/hold-time live in sdkconfig.defaults, not in the sketch.
  *
  * KNOWN LIMITATION on the Arduino/PlatformIO build (see README): the
- * bootloader ERASE works, but app-side detection does not fire here —
+ * bootloader ERASE works, but app-side detection does not fire here -
  * wasHardReset() stays false, onDataResetRequested() doesn't run, and the
  * indicator pin won't light. They're wired up below because the same sketch
  * gains those behaviors when the blifi component is used from a standalone
