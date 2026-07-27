@@ -8,6 +8,14 @@ versioned independently under [Semantic Versioning](https://semver.org/).
 
 Nothing yet.
 
+## [0.3.0] - 2026-07-27
+
+### Changed
+- Tracks blifi component 0.3.0. `begin()` sets the component's new
+  `manage_nvs = false`, keeping the wrapper's own NVS initialisation as the single
+  owner (behavior unchanged: the Arduino core brings up NVS and the wrapper is
+  defensive). No public API change.
+
 ## [0.2.0] - 2026-07-25
 
 ### Added

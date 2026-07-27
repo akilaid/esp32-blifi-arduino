@@ -44,17 +44,20 @@ bool BlifiClass::begin(const BlifiConfig &config) {
 bool BlifiClass::beginCfg(const blifi_config_t &cfg) {
   if (_started) return true;
 
-  // The Arduino core normally initialises NVS already; be defensive.
+  // The Arduino core normally initialises NVS already; be defensive here and
+  // tell blifi_init not to touch it again (manage_nvs = false).
   esp_err_t nerr = nvs_flash_init();
   if (nerr == ESP_ERR_NVS_NO_FREE_PAGES || nerr == ESP_ERR_NVS_NEW_VERSION_FOUND) {
     nvs_flash_erase();
     nvs_flash_init();
   }
+  blifi_config_t c = cfg;
+  c.manage_nvs = false;
 
   // Register the data-reset trampoline BEFORE blifi_init (init caches the flag).
   blifi_register_data_reset_callback(&BlifiClass::dataResetCb, this);
 
-  if (blifi_init(&cfg) != ESP_OK) return false;
+  if (blifi_init(&c) != ESP_OK) return false;
 
   esp_event_handler_instance_register(BLIFI_EVENT, ESP_EVENT_ANY_ID,
                                       &BlifiClass::eventHandler, this, nullptr);

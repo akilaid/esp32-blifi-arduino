@@ -34,12 +34,40 @@ void loop() {}
 
 ## Why PlatformIO (and not the plain Arduino IDE)?
 
-The `blifi` component uses **NimBLE**, but the Arduino IDE's stock ESP32 core is
-built with **Bluedroid** and ships a *precompiled* ESP-IDF - so it can neither
-build an external IDF component nor switch the BLE stack. This project therefore
-builds through **PlatformIO** with `framework = arduino, espidf`, which compiles
-ESP-IDF (and the `blifi` component) from source with NimBLE enabled. You still
-write ordinary Arduino code (`setup()`/`loop()`, `Serial`, `IPAddress`).
+The `blifi` component talks to the **raw ESP-IDF NimBLE host API**
+(`nimble_port_init`, `ble_gatts_*`, `ble_gap_*`). The BLE host stack (NimBLE vs
+Bluedroid) is a **build-time choice** baked into ESP-IDF when it is compiled - the
+two are mutually exclusive. The Arduino IDE's stock ESP32 core ships a
+*precompiled* ESP-IDF built with **Bluedroid**, and there is no `menuconfig` to
+flip: you cannot switch the host or link an external IDF component against it. So
+the plain Arduino IDE simply cannot build this library.
+
+This project therefore builds through **PlatformIO** (specifically the maintained
+[`pioarduino`](https://github.com/pioarduino/platform-espressif32) platform) with
+`framework = arduino, espidf`, which compiles ESP-IDF - and the `blifi` component -
+from source with `CONFIG_BT_NIMBLE_ENABLED=y`. You still write ordinary Arduino
+code (`setup()`/`loop()`, `Serial`, `IPAddress`); you just get a toolchain that
+owns its `sdkconfig`.
+
+### What about NimBLE in the Arduino IDE?
+
+A common question, since NimBLE *can* be used from a plain sketch:
+
+- **[NimBLE-Arduino](https://github.com/h2zero/NimBLE-Arduino) (h2zero)** is the
+  popular "NimBLE in a sketch" library, and it is excellent - but it exposes its
+  **own C++ API** (`NimBLEDevice`, `NimBLEServer`, ...), not the raw IDF host API
+  this component is written against. Using it would mean rewriting the entire BLE
+  transport as a second backend, not flipping a switch.
+- **A custom board package** with recompiled NimBLE IDF libraries would expose the
+  raw host API, but you then maintain a forked Arduino core per IDF release -
+  fragile and high-maintenance.
+- **Arduino-as-an-ESP-IDF-component** (what PlatformIO/`pioarduino` automates) is
+  the clean, community-standard way to get the raw IDF NimBLE host *and* the
+  Arduino API together. That is the path this library takes.
+
+If a true Arduino IDE (`.ino`) experience is important to you, the realistic route
+is a NimBLE-Arduino port of the transport - a legitimate future backend, but a
+parallel implementation rather than a small fix.
 
 ## Build & upload
 
