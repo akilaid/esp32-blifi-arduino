@@ -81,7 +81,9 @@ void BlifiClass::eventHandler(void *arg, esp_event_base_t base, int32_t id, void
   (void)base;
   BlifiClass *self = static_cast<BlifiClass *>(arg);
   const blifi_event_data_t *e = static_cast<const blifi_event_data_t *>(data);
-  if (e && self->_onStatus) self->_onStatus(e->status);
+  // STARTED carries no meaningful status (IDLE); skip it so onStatusChanged only
+  // fires on real status transitions.
+  if (e && id != BLIFI_EVENT_STARTED && self->_onStatus) self->_onStatus(e->status);
   if (id == BLIFI_EVENT_WIFI_CONNECTED && e && self->_onProvisioned) {
     self->_onProvisioned(IPAddress(e->ip.addr));
   }

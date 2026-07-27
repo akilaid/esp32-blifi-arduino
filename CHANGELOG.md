@@ -8,6 +8,17 @@ versioned independently under [Semantic Versioning](https://semver.org/).
 
 Nothing yet.
 
+## [0.3.1] - 2026-07-27
+
+### Changed
+- Tracks blifi component 0.3.1. The component now posts the full provisioning
+  lifecycle on `BLIFI_EVENT`, so `onStatusChanged` fires for the earlier phases too
+  (a phone connecting reports `HANDSHAKE_IN_PROGRESS`, credentials accepted reports
+  `CREDENTIALS_RECEIVED`) - no new API. `onProvisioned` still fires on Wi-Fi
+  connect.
+- `onStatusChanged` no longer fires a spurious `IDLE` at startup (the new
+  `BLIFI_EVENT_STARTED` carries no meaningful status and is skipped).
+
 ## [0.3.0] - 2026-07-27
 
 ### Changed
@@ -55,7 +66,7 @@ Nothing yet.
   Bluedroid-only and can't build the NimBLE component or change bootloader
   config), build/upload steps, and the API.
 - `Blifi.begin(BlifiConfig)` overload exposing the optional hard-reset indicator
-  pin (§6.2): `resetIndicator{ enable, gpio, activeLevel, pulseMs }`. Enable the
+  pin: `resetIndicator{ enable, gpio, activeLevel, pulseMs }`. Enable the
   feature via `CONFIG_BLIFI_RESET_INDICATOR_ENABLE=y` in `sdkconfig.defaults`, then
   set the pin/level/pulse at runtime. Opt-in; off by default.
 
@@ -80,7 +91,7 @@ Nothing yet.
   (like enabling this) needs a clean rebuild (`pio run -t fullclean`).
 - **Known limitation:** the bootloader erase works, but app-side hard-reset
   detection (`wasHardReset()`, `onDataResetRequested()`, the `HARD_RESET_TRIGGERED`
-  event, and the §6.2 indicator pin) does **not** fire on the Arduino/PlatformIO
+  event, and the indicator pin) does **not** fire on the Arduino/PlatformIO
   (ESP-IDF 5.5) stack - the bootloader RTC-retain flag is clobbered before the app
   reads it. Those work only on a standalone ESP-IDF (`idf.py`) build. Use
   `resetCredentials()` for an in-code reset.

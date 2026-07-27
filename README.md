@@ -143,7 +143,7 @@ provisioning.
 > **Known limitation on this build:** the bootloader *erase* works, but the
 > **app-side detection does not fire** here - `wasHardReset()` stays false,
 > `onDataResetRequested()` and the `HARD_RESET_TRIGGERED` event don't run, and the
-> §6.2 indicator pin won't light. On the Arduino/PlatformIO (ESP-IDF 5.5) stack the
+> indicator pin won't light. On the Arduino/PlatformIO (ESP-IDF 5.5) stack the
 > bootloader's RTC-retain flag is clobbered before the app reads it; the full
 > detection chain works only when the `blifi` component is built with a standalone
 > **ESP-IDF (`idf.py`)** project. Use `Blifi.resetCredentials()` (software) for an
