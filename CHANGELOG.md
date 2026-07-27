@@ -8,6 +8,12 @@ versioned independently under [Semantic Versioning](https://semver.org/).
 
 Nothing yet.
 
+## [0.3.2] - 2026-07-27
+
+### Changed
+- Tracks blifi component 0.3.2 (documentation and example-metadata fixes; no API
+  or behaviour change in the wrapper).
+
 ## [0.3.1] - 2026-07-27
 
 ### Changed
