@@ -8,6 +8,16 @@ versioned independently under [Semantic Versioning](https://semver.org/).
 
 Nothing yet.
 
+## [0.4.0] - 2026-07-28
+
+### Added
+- `BlifiConfig.stopBleAfterProvisioning` (default `false`) - tear BLE down after
+  provisioning succeeds (frees the NimBLE host RAM, closes the attack surface).
+- `Blifi.stopBle()` - stop the BLE stack on demand (wraps `blifi_stop_ble()`).
+
+### Changed
+- Tracks blifi component 0.4.0.
+
 ## [0.3.2] - 2026-07-27
 
 ### Changed

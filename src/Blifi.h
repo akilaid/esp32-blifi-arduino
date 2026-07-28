@@ -48,7 +48,10 @@ struct BlifiConfig {
   const char *pop = nullptr;          ///< fixed PoP: exactly 8 Crockford base32
                                       ///< chars (0-9, A-Z minus I/L/O/U); null =
                                       ///< auto-generate. Invalid → begin() fails.
-  BlifiResetIndicator resetIndicator; ///< optional §6.2 indicator pin
+  BlifiResetIndicator resetIndicator; ///< optional hard-reset indicator pin
+  bool stopBleAfterProvisioning = false; ///< tear BLE down once provisioning
+                                      ///< succeeds and the phone has the IP
+                                      ///< (frees RAM, closes the attack surface).
 };
 
 class BlifiClass {
@@ -78,6 +81,9 @@ class BlifiClass {
   bool isProvisioned();
   /** Erase stored credentials and return to provisioning (software reset). */
   void resetCredentials();
+  /** Tear the BLE stack down (stop advertising, disconnect, free the NimBLE host
+   *  RAM). Safe to call anytime; a later resetCredentials() brings BLE back. */
+  void stopBle();
   /** The device's Proof-of-Possession string (show it to the user). */
   const char *pop();
   /** Human-readable name for a status code (for logs). */

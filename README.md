@@ -105,9 +105,14 @@ PlatformIO project:
 | `Blifi.onStatusChanged(cb)` | `cb(blifi_status_t)` on every status change. |
 | `Blifi.isProvisioned()` | Whether Wi-Fi credentials are stored. |
 | `Blifi.resetCredentials()` | Forget Wi-Fi and re-enter provisioning (software reset). |
+| `Blifi.stopBle()` | Tear the BLE stack down now (free the NimBLE host RAM). |
 | `Blifi.pop()` | The device's Proof-of-Possession string. |
 | `Blifi.statusString(s)` | Human-readable name for a status code. |
 | `Blifi.onDataResetRequested(cb)` / `Blifi.wasHardReset()` | Reset-pin hard-reset hooks - see below. |
+
+To have the device shut BLE down automatically once it is online, set
+`BlifiConfig.stopBleAfterProvisioning = true` and pass it to `Blifi.begin(config)`.
+Default is `false` (BLE stays up after provisioning).
 
 ## Proof-of-Possession (PoP)
 

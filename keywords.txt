@@ -13,5 +13,6 @@ onDataResetRequested	KEYWORD2
 wasHardReset	KEYWORD2
 isProvisioned	KEYWORD2
 resetCredentials	KEYWORD2
+stopBle	KEYWORD2
 pop	KEYWORD2
 statusString	KEYWORD2

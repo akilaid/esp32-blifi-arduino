@@ -38,6 +38,7 @@ bool BlifiClass::begin(const BlifiConfig &config) {
   cfg.reset_indicator.gpio         = (int8_t)config.resetIndicator.gpio;
   cfg.reset_indicator.active_level = (uint8_t)(config.resetIndicator.activeLevel ? 1 : 0);
   cfg.reset_indicator.pulse_ms     = config.resetIndicator.pulseMs;
+  cfg.stop_ble_after_provisioning  = config.stopBleAfterProvisioning;
   return beginCfg(cfg);
 }
 
@@ -74,6 +75,7 @@ void BlifiClass::onDataResetRequested(std::function<void()> cb) { _onDataReset =
 bool BlifiClass::wasHardReset() { return blifi_was_hard_reset(); }
 bool BlifiClass::isProvisioned() { return blifi_is_provisioned(); }
 void BlifiClass::resetCredentials() { blifi_reset_credentials(); }
+void BlifiClass::stopBle() { blifi_stop_ble(); }
 const char *BlifiClass::pop() { return blifi_get_pop(); }
 const char *BlifiClass::statusString(blifi_status_t status) { return blifi_status_str(status); }
 
