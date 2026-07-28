@@ -8,6 +8,12 @@ versioned independently under [Semantic Versioning](https://semver.org/).
 
 Nothing yet.
 
+## [0.5.0] - 2026-07-28
+
+### Changed
+- Tracks blifi component 0.5.0: faster Wi-Fi connect (fast scan) and an
+  advertising-time Wi-Fi pre-scan so the network list is instant. No API change.
+
 ## [0.4.0] - 2026-07-28
 
 ### Added
